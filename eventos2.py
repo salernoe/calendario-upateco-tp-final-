@@ -11,10 +11,10 @@ from eventos3 import Evento
 class NuevoEvento(tk.Toplevel):
    
    
-    def __init__(self,marco, master=None ):
+    def __init__(self, master=None ):
         super().__init__(master)        
         self.master = master
-        self.marco = marco
+        #self.marco = marco
         self.title("undefined")
         #setting window size
         width=436
@@ -152,6 +152,8 @@ class NuevoEvento(tk.Toplevel):
        self.destroy()
 
     def guardar_evento(self,marco):
+        self.marco = marco
+        
         eventos = Evento()
         eventos.set_ingresar_nombre(self.ingresar_nombre.get())
         eventos.set_ingresar_fecha(self.ingresar_fecha.get())
@@ -167,7 +169,7 @@ class NuevoEvento(tk.Toplevel):
                 eventos = {"cantidad": 0, "evento": []}         
         
 
-        self.marco = marco
+        
         evento = []
         evento.append(eventos["cantidad"])
         evento.append(self.ingresar_nombre.get())
@@ -177,4 +179,4 @@ class NuevoEvento(tk.Toplevel):
         evento.append(self.ingresar_importancia.get())
         self.marco.actualizar_lista(eventos)
 
-        self.parent.destroy()
+        #self.parent.destroy()
