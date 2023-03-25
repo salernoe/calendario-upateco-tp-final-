@@ -23,6 +23,8 @@ class Calendario(Toplevel):
         self.geometry(alignstr)
         self.resizable(width=False, height=False)
 
+        self.varju = "hola"
+
         GLabel_464=Label(self)
         ft = tkFont.Font(family='Times',size=15)
         GLabel_464["font"] = ft
@@ -31,23 +33,23 @@ class Calendario(Toplevel):
         GLabel_464["text"] = " Calendario de Eventos"
         GLabel_464.place(x= 300,y=10,width=200,height=40)
 
-        tk = ttk.Treeview(self, columns=("Nombre", "Fecha", "Hora","Descripcion","Importacia"), name="tkDescuentos")
-        tk.column("#0", width=78)
-        tk.column("Nombre", width=150, anchor=CENTER)
-        tk.column("Fecha", width=150, anchor=CENTER)
-        tk.column("Hora", width=150, anchor=CENTER)
-        tk.column("Descripcion", width=150, anchor=CENTER)
-        tk.column("Importacia", width=150, anchor=CENTER)
+        self.tree = ttk.Treeview(self, columns=("Nombre", "Fecha", "Hora","Descripcion","Importacia"), name="tkDescuentos")
+        self.tree.column("#0", width=78)
+        self.tree.column("Nombre", width=150, anchor=CENTER)
+        self.tree.column("Fecha", width=150, anchor=CENTER)
+        self.tree.column("Hora", width=150, anchor=CENTER)
+        self.tree.column("Descripcion", width=150, anchor=CENTER)
+        self.tree.column("Importacia", width=150, anchor=CENTER)
         
-        tk.heading("#0", text="ID", anchor=CENTER)
-        tk.heading("Nombre", text="Nombre", anchor=CENTER)
-        tk.heading("Fecha", text="Fecha", anchor=CENTER)
-        tk.heading("Hora", text="Hora", anchor=CENTER)   
-        tk.heading("Descripcion", text="Descripcion", anchor=CENTER)
-        tk.heading("Importacia", text="Importacia", anchor=CENTER)
+        self.tree.heading("#0", text="ID", anchor=CENTER)
+        self.tree.heading("Nombre", text="Nombre", anchor=CENTER)
+        self.tree.heading("Fecha", text="Fecha", anchor=CENTER)
+        self.tree.heading("Hora", text="Hora", anchor=CENTER)   
+        self.tree.heading("Descripcion", text="Descripcion", anchor=CENTER)
+        self.tree.heading("Importacia", text="Importacia", anchor=CENTER)
 
-        tk.bind("<<TreeviewSelect>>", self.obtener_fila)
-        tk.place(x=10,y=50,width=820,height=300)          
+        self.tree.bind("<<TreeviewSelect>>", self.obtener_fila)
+        self.tree.place(x=10,y=50,width=820,height=300)          
         
         self.refrescar()
 
@@ -106,7 +108,7 @@ class Calendario(Toplevel):
             self.select_id = -1
 
     def agregar(self):
-        NuevoEvento(self.master)
+        NuevoEvento(self)
 
     def get_elemento_lista(self):
         with open("eventos.json", 'r') as archivo:
@@ -179,7 +181,8 @@ class Calendario(Toplevel):
 
     def actualizar_lista(self, evento):
         # add data to the treeview
-        tk.insert('', tk.END, values=evento)
+
+        self.tree.insert('', tk.END, values=evento)
         
             
     def salir(self):

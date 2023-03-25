@@ -5,6 +5,7 @@ import tkinter.messagebox as tkMsgBox
 import tkinter as tk
 from tkinter import ttk
 import json
+import os
 
 class Evento:
     def __init__(self):
@@ -14,6 +15,8 @@ class Evento:
         self.descripcion = ""
         self.importancia = ""
     
+    # set attributes
+
     def set_nombre(self, nombre):
         self.nombre = nombre
     
@@ -23,11 +26,29 @@ class Evento:
     def set_hora(self,hora):
         self.hora = hora
 
-    def descripcion(self, descripcion):
+    def set_descripcion(self, descripcion):
         self.descripcion = descripcion
 
-    def importancia(self, importancia):
+    def set_importancia(self, importancia):
         self.importancia = importancia
+
+    # get attributes
+
+    def get_nombre(self):
+        return self.nombre
+    
+    def get_fecha(self):
+        return self.fecha
+    
+    def get_hora(self):
+        return self.hora
+    
+    def get_descripcion(self):
+        return self.descripcion
+    
+    def get_importancia(self):
+        return self.importancia
+
 
 
     def get_elemento_tupla(self):
@@ -62,7 +83,11 @@ class Evento:
             json.dump(eventos, archivo)
     
     def guardar(self):
-        with open("eventos.json", 'r') as archivo:
+        abs_path_json = os.path.dirname(os.path.abspath('eventos.json'))
+        abs_path = os.path.dirname(abs_path_json)
+        path_json = os.path.relpath(abs_path_json, abs_path)+'\eventos.json'
+        print(path_json)
+        with open(path_json, 'r') as archivo:
             try:
                 eventos = json.load(archivo)
             except ValueError:
@@ -75,10 +100,13 @@ class Evento:
         evento["hora"] = self.hora
         evento["descripcion"] = self.descripcion
         evento["importancia"] = self.importancia
-        evento["eventos"].append(evento)
-        evento["cantidad"] = int(eventos["cantidad"])+1
-        
-        with open("eventos.json", 'w') as archivo:
+        print(evento)
+        print('********************************')
+        print(eventos)
+        eventos["recetas"].append(evento)
+        eventos["cantidad"] = int(eventos["cantidad"])+1
+        print(eventos)
+        with open("calendario-upateco-tp-final--main\eventos.json", 'w') as archivo:
             json.dump(eventos, archivo)
 
     def guardarV1(self):

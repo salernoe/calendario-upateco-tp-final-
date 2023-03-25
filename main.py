@@ -2,7 +2,6 @@ import tkinter as tk
 import tkinter.font as tkFont
 from tkinter import ttk
 from eventos1 import Calendario
-import os
 
 class Bienvenida:
     def __init__(self, root):
@@ -55,8 +54,7 @@ class Bienvenida:
 if __name__ == "__main__":
     root = tk.Tk()
     app = Bienvenida(root)
-    root.iconbitmap(default="calendario.ico")
     root.mainloop()
-    
+    root.iconbitmap(default="calendario.ico")
 
 

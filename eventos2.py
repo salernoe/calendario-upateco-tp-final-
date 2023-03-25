@@ -11,10 +11,10 @@ from eventos3 import Evento
 class NuevoEvento(tk.Toplevel):
    
    
-    def __init__(self, master=None ):
+    def __init__(self,marco, master=None ):
         super().__init__(master)        
         self.master = master
-        #self.marco = marco
+        self.marco = marco
         self.title("undefined")
         #setting window size
         width=436
@@ -47,14 +47,14 @@ class NuevoEvento(tk.Toplevel):
         GLabel_710["text"] = "Nombre"
         GLabel_710.place(x=10,y=40,width=70,height=25)
 
-        ingresar_nombre=tk.Entry(self)
-        ingresar_nombre["borderwidth"] = "1px"
+        self.ingresar_nombre=tk.Entry(self)
+        self.ingresar_nombre["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
-        ingresar_nombre["font"] = ft
-        ingresar_nombre["fg"] = "#333333"
-        ingresar_nombre["justify"] = "center"
-        ingresar_nombre["text"] = "Entry"
-        ingresar_nombre.place(x=80,y=40,width=259,height=30)
+        self.ingresar_nombre["font"] = ft
+        self.ingresar_nombre["fg"] = "#333333"
+        self.ingresar_nombre["justify"] = "center"
+        self.ingresar_nombre["text"] = "nombre"
+        self.ingresar_nombre.place(x=80,y=40,width=259,height=30)
 
         GLabel_783=tk.Label(self)
         ft = tkFont.Font(family='Times',size=10)
@@ -64,14 +64,14 @@ class NuevoEvento(tk.Toplevel):
         GLabel_783["text"] = "Fecha"
         GLabel_783.place(x=10,y=80,width=70,height=25)
 
-        ingresar_fecha=tk.Entry(self)
-        ingresar_fecha["borderwidth"] = "1px"
+        self.ingresar_fecha=tk.Entry(self)
+        self.ingresar_fecha["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
-        ingresar_fecha["font"] = ft
-        ingresar_fecha["fg"] = "#333333"
-        ingresar_fecha["justify"] = "center"
-        ingresar_fecha["text"] = "Entry"
-        ingresar_fecha.place(x=80,y=80,width=259,height=30)
+        self.ingresar_fecha["font"] = ft
+        self.ingresar_fecha["fg"] = "#333333"
+        self.ingresar_fecha["justify"] = "center"
+        self.ingresar_fecha["text"] = "fecha"
+        self.ingresar_fecha.place(x=80,y=80,width=259,height=30)
 
         GLabel_520=tk.Label(self)
         ft = tkFont.Font(family='Times',size=10)
@@ -81,14 +81,14 @@ class NuevoEvento(tk.Toplevel):
         GLabel_520["text"] = "Hora"
         GLabel_520.place(x=10,y=120,width=70,height=25)
 
-        ingresar_hora=tk.Entry(self)
-        ingresar_hora["borderwidth"] = "1px"
+        self.ingresar_hora=tk.Entry(self)
+        self.ingresar_hora["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
-        ingresar_hora["font"] = ft
-        ingresar_hora["fg"] = "#333333"
-        ingresar_hora["justify"] = "center"
-        ingresar_hora["text"] = "Entry"
-        ingresar_hora.place(x=80,y=120,width=259,height=30)
+        self.ingresar_hora["font"] = ft
+        self.ingresar_hora["fg"] = "#333333"
+        self.ingresar_hora["justify"] = "center"
+        self.ingresar_hora["text"] = "hora"
+        self.ingresar_hora.place(x=80,y=120,width=259,height=30)
 
         GLabel_45=tk.Label(self)
         ft = tkFont.Font(family='Times',size=10)
@@ -98,14 +98,14 @@ class NuevoEvento(tk.Toplevel):
         GLabel_45["text"] = "Descripcion"
         GLabel_45.place(x=0,y=160,width=70,height=25)
 
-        ingresar_descripcion=tk.Entry(self)
-        ingresar_descripcion["borderwidth"] = "1px"
+        self.ingresar_descripcion=tk.Entry(self)
+        self.ingresar_descripcion["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
-        ingresar_descripcion["font"] = ft
-        ingresar_descripcion["fg"] = "#333333"
-        ingresar_descripcion["justify"] = "center"
-        ingresar_descripcion["text"] = "Entry"
-        ingresar_descripcion.place(x=80,y=160,width=259,height=30)
+        self.ingresar_descripcion["font"] = ft
+        self.ingresar_descripcion["fg"] = "#333333"
+        self.ingresar_descripcion["justify"] = "center"
+        self.ingresar_descripcion["text"] = "descripcion"
+        self.ingresar_descripcion.place(x=80,y=160,width=259,height=30)
 
         GLabel_545=tk.Label(self)
         ft = tkFont.Font(family='Times',size=10)
@@ -115,14 +115,14 @@ class NuevoEvento(tk.Toplevel):
         GLabel_545["text"] = "Importancia"
         GLabel_545.place(x=0,y=200,width=70,height=25)
 
-        ingresar_importancia=tk.Entry(self)
-        ingresar_importancia["borderwidth"] = "1px"
+        self.ingresar_importancia=tk.Entry(self)
+        self.ingresar_importancia["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
-        ingresar_importancia["font"] = ft
-        ingresar_importancia["fg"] = "#333333"
-        ingresar_importancia["justify"] = "center"
-        ingresar_importancia["text"] = "Entry"
-        ingresar_importancia.place(x=80,y=200,width=259,height=30)
+        self.ingresar_importancia["font"] = ft
+        self.ingresar_importancia["fg"] = "#333333"
+        self.ingresar_importancia["justify"] = "center"
+        self.ingresar_importancia["text"] = "importancia"
+        self.ingresar_importancia.place(x=80,y=200,width=259,height=30)
 
         GButton_773=tk.Button(self)
         GButton_773["bg"] = "#f0f0f0"
@@ -151,25 +151,26 @@ class NuevoEvento(tk.Toplevel):
     def cancelar_evento(self):
        self.destroy()
 
-    def guardar_evento(self,marco):
-        self.marco = marco
-        
-        eventos = Evento()
-        eventos.set_ingresar_nombre(self.ingresar_nombre.get())
-        eventos.set_ingresar_fecha(self.ingresar_fecha.get())
-        eventos.set_ingresar_hora(self.ingresar_hora.get())
-        eventos.set_ingresar_descripcion(self.ingresar_descripcion.get())
-        eventos.set_ingresar_importancia(self.ingresar_importancia.get())
-        eventos.guardar()
-
-        with open("eventos.json", 'r') as archivo:
+    def guardar_evento(self):
+        print('Point---->guardar_evento()')
+        evento = Evento()
+        evento.set_nombre(self.ingresar_nombre.get())
+        evento.set_fecha(self.ingresar_fecha.get())
+        evento.set_hora(self.ingresar_hora.get())
+        evento.set_descripcion(self.ingresar_descripcion.get())
+        evento.set_importancia(self.ingresar_importancia.get())
+        print('Point---->before---->guardar()')
+        evento.guardar()
+        print('Point---->after---->guardar()')
+        with open("calendario-upateco-tp-final--main\eventos.json", 'r') as archivo:
             try:
                 eventos = json.load(archivo)
             except ValueError:
-                eventos = {"cantidad": 0, "evento": []}         
+                eventos = {"cantidad": 0, "recetas": []}         
         
 
-        
+        print('Point---->after---->leer_JSON')
+        print(eventos)
         evento = []
         evento.append(eventos["cantidad"])
         evento.append(self.ingresar_nombre.get())
@@ -177,6 +178,7 @@ class NuevoEvento(tk.Toplevel):
         evento.append(self.ingresar_hora.get())
         evento.append(self.ingresar_descripcion.get())
         evento.append(self.ingresar_importancia.get())
-        self.marco.actualizar_lista(eventos)
+        self.marco.actualizar_lista(evento)
 
-        #self.parent.destroy()
+        # Review parent to self(NuevoEvento)
+        # self.parent.destroy()
