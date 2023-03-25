@@ -54,7 +54,8 @@ class Bienvenida:
 if __name__ == "__main__":
     root = tk.Tk()
     app = Bienvenida(root)
-    root.mainloop()
     root.iconbitmap(default="calendario.ico")
+    root.mainloop()
+    
 
 
