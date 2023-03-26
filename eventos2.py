@@ -15,7 +15,7 @@ class NuevoEvento(tk.Toplevel):
         super().__init__(master)        
         self.master = master
         self.marco = marco
-        self.title("undefined")
+        self.title("Calendario de eventos ")
         #setting window size
         width=436
         height=319
@@ -144,12 +144,15 @@ class NuevoEvento(tk.Toplevel):
         GButton_191.place(x=320,y=260,width=80,height=30)
         GButton_191["command"] = self.cancelar_evento
 
+      
+    
     def actualizar_lista(self, evento):
         # add data to the treeview
         tk.insert('', tk.END, values=evento)
 
     def cancelar_evento(self):
        self.destroy()
+       
 
     def guardar_evento(self):
         print('Point---->guardar_evento()')
@@ -160,13 +163,13 @@ class NuevoEvento(tk.Toplevel):
         evento.set_descripcion(self.ingresar_descripcion.get())
         evento.set_importancia(self.ingresar_importancia.get())
         print('Point---->before---->guardar()')
-        evento.guardar()
+        #evento.guardar()
         print('Point---->after---->guardar()')
-        with open("calendario-upateco-tp-final--main\eventos.json", 'r') as archivo:
+        with open("eventos.json", 'r') as archivo:
             try:
                 eventos = json.load(archivo)
             except ValueError:
-                eventos = {"cantidad": 0, "recetas": []}         
+                eventos = {"cantidad": 0, "recetas": []}   
         
 
         print('Point---->after---->leer_JSON')
