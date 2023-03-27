@@ -64,17 +64,18 @@ class Editar(ttk.Frame):
         self.ingresar_importancia.set(ingresar_importancia)
 
     def editar_evento(self):
-        eventos = Evento()
-        eventos.set_id(self.id)
-        eventos.set_ingresar_nombre(self.ingresar_nombre.get())
-        eventos.set_ingresar_fecha(self.ingresar_fecha.get())
-        eventos.set_ingresar_hora(self.ingresar_hora.get())
-        eventos.set_ingresar_descripcion(self.ingresar_descripcion.get())
-        eventos.set_ingresar_importancia(self.ingresar_importancia.get())
-        eventos.editar(self.id)
-        
-        self.marco.clear_all()
-        self.marco.get_elemento_lista()
+        evento = Evento()
+        evento.set_id(self.id)
+        evento.set_nombre(self.ingresar_nombre.get())
+        evento.set_fecha(self.ingresar_fecha.get())
+        evento.set_hora(self.ingresar_hora.get())
+        evento.set_descripcion(self.ingresar_descripcion.get())
+        evento.set_importancia(self.ingresar_importancia.get())
+        # eventos.editar(self.id)
+        print(evento)
+        print('el evento')
+        # self.marco.clear_all()
+        self.marco.get_elemento_lista(evento)
 
 
         self.parent.destroy()

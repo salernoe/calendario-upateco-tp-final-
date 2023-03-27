@@ -23,8 +23,6 @@ class Calendario(Toplevel):
         self.geometry(alignstr)
         self.resizable(width=False, height=False)
 
-        self.varju = "hola"
-
         GLabel_464=Label(self)
         ft = tkFont.Font(family='Times',size=15)
         GLabel_464["font"] = ft
@@ -33,15 +31,17 @@ class Calendario(Toplevel):
         GLabel_464["text"] = " Calendario de Eventos"
         GLabel_464.place(x= 300,y=10,width=200,height=40)
 
-        self.tree = ttk.Treeview(self, columns=("Nombre", "Fecha", "Hora","Descripcion","Importacia"), name="tkDescuentos")
-        self.tree.column("#0", width=78)
+        self.tree = ttk.Treeview(self, columns=("Id", "Nombre", "Fecha", "Hora","Descripcion","Importacia"), name="tkDescuentos")
+        self.tree.column("#0", width=0)
+        self.tree.column("Id", width=48, anchor=CENTER)
         self.tree.column("Nombre", width=150, anchor=CENTER)
         self.tree.column("Fecha", width=150, anchor=CENTER)
         self.tree.column("Hora", width=150, anchor=CENTER)
         self.tree.column("Descripcion", width=150, anchor=CENTER)
         self.tree.column("Importacia", width=150, anchor=CENTER)
         
-        self.tree.heading("#0", text="ID", anchor=CENTER)
+        self.tree.heading("#0")
+        self.tree.heading("Id", text="ID", anchor=CENTER)
         self.tree.heading("Nombre", text="Nombre", anchor=CENTER)
         self.tree.heading("Fecha", text="Fecha", anchor=CENTER)
         self.tree.heading("Hora", text="Hora", anchor=CENTER)   
@@ -52,6 +52,7 @@ class Calendario(Toplevel):
         self.tree.place(x=10,y=50,width=820,height=300)          
         
         self.refrescar()
+        self.carga_registros()
 
         ft = tkFont.Font(family='Times',size=10)
         btn_agregar = Button(self)
@@ -110,28 +111,63 @@ class Calendario(Toplevel):
     def agregar(self):
         NuevoEvento(self)
 
-    def get_elemento_lista(self):
+    def get_elemento_lista(self, evento_nuevo):
         with open("eventos.json", 'r') as archivo:
             try:
                 eventos = json.load(archivo)
             except ValueError:
-                eventos = {"cantidad": 1, "eventos":[]}
-        lista_eventos = []
+                eventos = {"cantidad": 1, "recetas":[]}
+        
+        index = 0
+        for evento in eventos["recetas"]:
+            print(evento_nuevo.get_id())
+            if evento["id"] == evento_nuevo.get_id():
+                break
+            index += 1
+           
+        print(evento_nuevo)   
+        
+        evento = {}
+        evento["id"] = evento_nuevo.get_id()
+        evento["nombre"] = evento_nuevo.get_nombre()
+        evento["fecha"] = evento_nuevo.get_fecha()
+        evento["hora"] = evento_nuevo.get_hora()
+        evento["descripcion"] = evento_nuevo.get_descripcion()
+        evento["importancia"] = evento_nuevo.get_importancia()
+        eventos["recetas"][index]= evento
 
-        #generamos los datos
-        for evento in eventos["eventos"]:
-           lista_eventos.append ((evento["id"],evento["ingresar_nombre"], evento["ingresar_fecha"], evento["ingresar_hora"], evento["ingresar_descripcion"],evento["ingresar_importancia"]))
-        # add data to the treeview
-        for evento in lista_eventos:
-            tk.insert('', 'end', text=evento[0], values=evento)
+        with open("eventos.json", 'w') as archivo:
+            json.dump(eventos, archivo)        
+
+        seleccion = self.tree.selection()
+        if seleccion:
+            for item_id in seleccion:
+                evento_tupla = []
+                evento_tupla.append(evento_nuevo.get_id())
+                evento_tupla.append(evento_nuevo.get_nombre())
+                evento_tupla.append(evento_nuevo.get_fecha())
+                evento_tupla.append(evento_nuevo.get_hora())
+                evento_tupla.append(evento_nuevo.get_descripcion())
+                evento_tupla.append(evento_nuevo.get_importancia())
+                self.tree.delete(item_id)
+                nuevo = self.tree.insert('', tk.END, values=evento_tupla)
+                self.tree.move(nuevo, '', index)
+        # #generamos los datos
+        # for evento in eventos["eventos"]:
+        #    print('ver el evento registro')
+        #    print(evento)
+        #    lista_eventos.append ((evento["id"],evento["nombre"], evento["fecha"], evento["hora"], evento["descripcion"],evento["importancia"]))
+        # # add data to the treeview
+        # for evento in lista_eventos:
+        #     self.tree.insert('', 'end', text=evento[0], values=evento)
 
         
     def editar(self): 
-        seleccion = tk.selection()
+        seleccion = self.tree.selection()
         # si selection() devuelve una tupla vacia, no hay seleccion
         if seleccion:
             for item_id in seleccion:
-                item = tk.item(item_id) # obtenemos el item y sus datos
+                item = self.tree.item(item_id) # obtenemos el item y sus datos
                 id_evento = item['values'][0] # capturo el id de mi registro
                 #Receta.eliminar(id_receta) # actualizo mi .json
                 #self.tree.delete(item_id) # actualizo treeview
@@ -170,14 +206,19 @@ class Calendario(Toplevel):
         
 
     def eliminar(self):
-        seleccion = tk.selection()
+        seleccion = self.tree.selection()
+        print('ver seleccion')
+        print(seleccion)
         # si selection() devuelve una tupla vacia, no hay seleccion
         if seleccion:
             for item_id in seleccion:
-                item = tk.item(item_id) # obtenemos el item y sus datos
-                id_evento = item['values'][0] # capturo el id de mi registro
+                item = self.tree.item(item_id) # obtenemos el item y sus datos
+                print('ver item')
+                print(item)
+                id_evento = item["values"][0] # capturo el id de mi registro
+                print('El ID es: ' + str(id_evento))
                 Evento.eliminar(id_evento) # actualizo mi .json
-                tk.delete(item_id) # actualizo treeview
+                self.tree.delete(item_id) # actualizo treeview
 
     def actualizar_lista(self, evento):
         # add data to the treeview
@@ -187,6 +228,24 @@ class Calendario(Toplevel):
             
     def salir(self):
         self.destroy()
+
+    def carga_registros(self):
+        with open("eventos.json", 'r') as archivo:
+            try:
+                eventos = json.load(archivo)
+            except ValueError:
+                eventos = {"cantidad": 0, "recetas": []}
+        print(eventos)        
+        for evento in eventos["recetas"]:
+            evento_formato = []
+            evento_formato.append(evento["id"])
+            evento_formato.append(evento["nombre"])
+            evento_formato.append(evento["fecha"])
+            evento_formato.append(evento["hora"])
+            evento_formato.append(evento["descripcion"])
+            evento_formato.append(evento["importancia"])
+            self.tree.insert('', tk.END, values=evento_formato)
+
     
     def refrescar(self):        
         """tkDescuentos = self.nametowidget("tkDescuentos")

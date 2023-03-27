@@ -13,7 +13,7 @@ class NuevoEvento(tk.Toplevel):
    
     def __init__(self,marco, master=None ):
         super().__init__(master)        
-        self.master = master
+        self.master = self
         self.marco = marco
         self.title("Calendario de eventos ")
         #setting window size
@@ -145,7 +145,13 @@ class NuevoEvento(tk.Toplevel):
         GButton_191["command"] = self.cancelar_evento
 
       
-    
+    def limpiar_campos(self):
+        self.ingresar_nombre.delete(0, END)
+        self.ingresar_fecha.delete(0, END)
+        self.ingresar_hora.delete(0, END)
+        self.ingresar_descripcion.delete(0, END)
+        self.ingresar_importancia.delete(0, END)
+
     def actualizar_lista(self, evento):
         # add data to the treeview
         tk.insert('', tk.END, values=evento)
@@ -163,7 +169,7 @@ class NuevoEvento(tk.Toplevel):
         evento.set_descripcion(self.ingresar_descripcion.get())
         evento.set_importancia(self.ingresar_importancia.get())
         print('Point---->before---->guardar()')
-        #evento.guardar()
+        evento.guardar()
         print('Point---->after---->guardar()')
         with open("eventos.json", 'r') as archivo:
             try:
@@ -181,7 +187,9 @@ class NuevoEvento(tk.Toplevel):
         evento.append(self.ingresar_hora.get())
         evento.append(self.ingresar_descripcion.get())
         evento.append(self.ingresar_importancia.get())
+        print('Ver format evento')
+        print(evento)
         self.marco.actualizar_lista(evento)
-
+        self.limpiar_campos()
         # Review parent to self(NuevoEvento)
-        # self.parent.destroy()
+        self.destroy()
