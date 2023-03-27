@@ -15,7 +15,7 @@ class NuevoEvento(tk.Toplevel):
         super().__init__(master)        
         self.master = self
         self.marco = marco
-        self.title("Calendario de eventos ")
+        self.title("Calendario de eventos tp final upteco ")
         #setting window size
         width=436
         height=319
@@ -24,6 +24,7 @@ class NuevoEvento(tk.Toplevel):
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         self.geometry(alignstr)
         self.resizable(width=False, height=False)
+        self.configure(bg='orange')
 
         self.ingresar_nombre = tk.StringVar()
         self.ingresar_fecha = tk.StringVar()
@@ -32,12 +33,13 @@ class NuevoEvento(tk.Toplevel):
         self.ingresar_importancia = tk.StringVar()
 
         GMessage_488=tk.Message(self)
-        ft = tkFont.Font(family='Times',size=10)
+        ft = tkFont.Font(family='Times',size=12)
         GMessage_488["font"] = ft
         GMessage_488["fg"] = "#333333"
         GMessage_488["justify"] = "center"
         GMessage_488["text"] = "Ingreso de datos"
-        GMessage_488.place(x=140,y=0,width=129,height=38)
+        GMessage_488.place(x=10,y=0,width=429,height=38)
+        GMessage_488.configure(bg='orange')
 
         GLabel_710=tk.Label(self)
         ft = tkFont.Font(family='Times',size=10)
@@ -46,6 +48,7 @@ class NuevoEvento(tk.Toplevel):
         GLabel_710["justify"] = "center"
         GLabel_710["text"] = "Nombre"
         GLabel_710.place(x=10,y=40,width=70,height=25)
+        GLabel_710.configure(bg='orange')
 
         self.ingresar_nombre=tk.Entry(self)
         self.ingresar_nombre["borderwidth"] = "1px"
@@ -63,6 +66,7 @@ class NuevoEvento(tk.Toplevel):
         GLabel_783["justify"] = "center"
         GLabel_783["text"] = "Fecha"
         GLabel_783.place(x=10,y=80,width=70,height=25)
+        GLabel_783.configure(bg='orange')
 
         self.ingresar_fecha=tk.Entry(self)
         self.ingresar_fecha["borderwidth"] = "1px"
@@ -80,6 +84,7 @@ class NuevoEvento(tk.Toplevel):
         GLabel_520["justify"] = "center"
         GLabel_520["text"] = "Hora"
         GLabel_520.place(x=10,y=120,width=70,height=25)
+        GLabel_520.configure(bg='orange')
 
         self.ingresar_hora=tk.Entry(self)
         self.ingresar_hora["borderwidth"] = "1px"
@@ -97,6 +102,7 @@ class NuevoEvento(tk.Toplevel):
         GLabel_45["justify"] = "center"
         GLabel_45["text"] = "Descripcion"
         GLabel_45.place(x=0,y=160,width=70,height=25)
+        GLabel_45.configure(bg='orange')
 
         self.ingresar_descripcion=tk.Entry(self)
         self.ingresar_descripcion["borderwidth"] = "1px"
@@ -114,6 +120,7 @@ class NuevoEvento(tk.Toplevel):
         GLabel_545["justify"] = "center"
         GLabel_545["text"] = "Importancia"
         GLabel_545.place(x=0,y=200,width=70,height=25)
+        GLabel_545.configure(bg='orange')
 
         self.ingresar_importancia=tk.Entry(self)
         self.ingresar_importancia["borderwidth"] = "1px"

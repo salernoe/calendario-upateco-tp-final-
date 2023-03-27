@@ -16,12 +16,14 @@ class Editar(ttk.Frame):
         super().__init__(parent, padding=(20))
         self.parent = parent
         self.marco = marco
-        parent.title("Calendario de eventos")
-        parent.geometry("500x300+180+100")
+        parent.title("Calendario de eventos tp final upteco")
+        parent.geometry("400x180+180+100")
+        parent.configure(bg='orange')
         self.grid(sticky=(tk.N, tk.S, tk.E, tk.W))
         parent.columnconfigure(0, weight=1)
         parent.rowconfigure(0, weight=1)
         parent.resizable(False, False)
+        parent.configure(bg='orange')
         
         self.id = None
         self.ingresar_nombre = tk.StringVar()
@@ -38,12 +40,12 @@ class Editar(ttk.Frame):
         ttk.Entry(self, textvariable=self.ingresar_hora).grid(row=3, column=2)
         ttk.Label(self, text="Descripcion:").grid(row=4, column=1)
         ttk.Entry(self, textvariable=self.ingresar_descripcion).grid(row=4, column=2)
-        ttk.Label(self, text=" Importancia:").grid(row=4, column=1)
+        ttk.Label(self, text=" Importancia:").grid(row=5, column=1)
         ttk.Entry(self, textvariable=self.ingresar_importancia).grid(row=5, column=2)
 
 
-        ttk.Button(self, text="Guardar", command=self.editar_evento).grid(row=5, column=1)
-        ttk.Button(self, text="Cerrar", command=parent.destroy).grid(row=5, column=3)
+        ttk.Button(self, text="Guardar", command=self.editar_evento).grid(row=12, column=3)
+        ttk.Button(self, text="Cerrar", command=parent.destroy).grid(row=12, column=4)
 
     def set_id(self, id):
         self.id = id

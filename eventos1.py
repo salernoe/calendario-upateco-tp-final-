@@ -16,20 +16,22 @@ class Calendario(Toplevel):
         self.select_id = -1        
         self.title("Calendario de eventos tp final upteco")        
         width=900
-        height=500
+        height=430
         screenwidth = self.winfo_screenwidth()
         screenheight = self.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         self.geometry(alignstr)
         self.resizable(width=False, height=False)
-
+        self.configure(bg='orange')
+        
         GLabel_464=Label(self)
-        ft = tkFont.Font(family='Times',size=15)
+        ft = tkFont.Font(family='Times',size=29)
         GLabel_464["font"] = ft
         GLabel_464["fg"] = "#333333"
         GLabel_464["justify"] = "center"
         GLabel_464["text"] = " Calendario de Eventos"
-        GLabel_464.place(x= 300,y=10,width=200,height=40)
+        GLabel_464.place(x= 230,y=10,width=400,height=40)
+        GLabel_464.configure(bg='orange')
 
         self.tree = ttk.Treeview(self, columns=("Id", "Nombre", "Fecha", "Hora","Descripcion","Importacia"), name="tkDescuentos")
         self.tree.column("#0", width=0)

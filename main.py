@@ -15,14 +15,21 @@ class Bienvenida:
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         root.geometry(alignstr)
         root.resizable(width=False, height=False)
+        root.configure(bg='orange')
+        img=tk.photoImagen(filr="logo_upateco.png")
+        lbl_img= tk.Label( root,image=img)
+        lbl_img.pack()
+        
+
 
         GLabel_764=tk.Label(root)
-        ft = tkFont.Font(family='Times',size=10)
+        ft = tkFont.Font(family='Times',size=15)
         GLabel_764["font"] = ft
         GLabel_764["fg"] = "#333333"
         GLabel_764["justify"] = "center"
         GLabel_764["text"] = "Bienvenidos al calendario de eventos"
-        GLabel_764.place(x=90,y=20,width=205,height=74)
+        GLabel_764.place(x=4,y=20,width=340,height=54)
+        GLabel_764.configure(bg='orange')
 
         GButton_955=tk.Button(root)
         GButton_955["bg"] = "#f0f0f0"
