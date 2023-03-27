@@ -1,7 +1,10 @@
 import tkinter as tk
 import tkinter.font as tkFont
 from tkinter import ttk
+from tkinter import PhotoImage
 from eventos1 import Calendario
+from PIL import Image, ImageTk
+import io
 
 class Bienvenida:
     def __init__(self, root):
@@ -16,9 +19,9 @@ class Bienvenida:
         root.geometry(alignstr)
         root.resizable(width=False, height=False)
         root.configure(bg='orange')
-        img=tk.photoImagen(filr="logo_upateco.png")
-        lbl_img= tk.Label( root,image=img)
-        lbl_img.pack()
+        #img=tk.photoImagen(filr="logo_upateco.png")
+        #root.lbl_img= tk.Label( root,image=img)
+        #root.lbl_img.pack()
         
 
 
